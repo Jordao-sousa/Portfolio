@@ -3,8 +3,53 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 
 *{
+    list-style: none;
+    text-decoration: none;
     margin: 0;
     padding: 0;
+}
+
+:root{
+    --font-primary: "baloo Da 2", sans-serif;
+    --font-secundary: "Josefin Slab", sans-serif;
+    --font-action: "Muli", sans-serif;
+}
+
+.menu-hamburguer{
+    transition: 1s ease;
+    width: 2.5rem;
+    height: 2.5rem;
+    position: fixed;
+    z-index: 3;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.line{
+    width: 100%;
+    height: .1rem;
+    background-color:#a044ff;
+    box-shadow: .1rem .1rem 2px #000;
+}
+
+.menu-hamburguers #line1{
+    display: none;
+}
+.menu-hamburguers #line2{
+    transition: 1s ease;
+    transform: rotate(135deg);
+    position: absolute;
+    box-shadow: none;
+}
+.menu-hamburguers #line3{
+    transition: 1s ease;
+    transform: rotate(-135deg);
+    position: absolute;
+    box-shadow: none;
 }
 
 header{
@@ -30,7 +75,7 @@ header{
 
 @keyframes zoom{
     0%{
-        transform: scale(1.4);
+        transform: scale(1.3);
     }
     100%{
         transform: scale(1);
@@ -46,7 +91,7 @@ header{
 
 .banner h1{
     color: #eee;
-    font-family: "Baloo da 2", sans-serif;
+    font-family: var(--font-primary);
     font-size: 3.5rem;
     font-weight: 200;
     text-shadow: .3rem .4rem 2px rgba(0, 0, 0, 0.4);
@@ -57,7 +102,7 @@ header{
 }
 
 .banner p{
-    font-family: "Josefin Slab", sans-serif;
+    font-family: var(--font-secundary);
     color: #eee;
     font-size: 2rem;
     text-shadow: .2rem .2rem 2px rgba(0, 0, 0, 0.4);
@@ -69,7 +114,7 @@ header{
 }
 
 .banner button{
-    font-family: "Muli", sans-serif;
+    font-family: var(--font-action);
     color: #eee;
     font-size: 1rem;
     letter-spacing: .1rem;
@@ -77,19 +122,73 @@ header{
     background: #6a3093;
     background: -webkit-linear-gradient(to right, #a044ff, #6a3093);
     background: linear-gradient(to right, #a044ff, #6a3093);
-    padding: 1rem 3rem;
-    border-radius: .5rem;
+    padding: 1rem 3rem; 
+
     border: none;
     cursor: pointer;
     transition: 0.5s ease;
     opacity: 0;
     animation: moveBanner 1.8s forwards;
+    overflow: hidden;
 
 }
 
 .banner button:hover{
-    opacity: 0.6;
-    border: 1px solid #eee;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.banner button:hover span:nth-child(1){
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, #eee, #fff);
+    animation: animate-top .5s;
+}
+.banner button:hover span:nth-child(2){
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(to bottom, #eee, #fff);
+    animation: animate-right .5s;
+}
+.banner button:hover span:nth-child(3){
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to left, #eee, #fff);
+    animation: animate-bottom .5s;
+}
+.banner button:hover span:nth-child(4){
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(to top, #eee, #fff);
+    animation: animate-left .5s;
+}
+
+@keyframes animate-top{
+    0%{transform: translateX(-100%);}
+    100%{transform: translateX(100%);}
+}
+@keyframes animate-left{
+    0%{transform: translateY(100%);}
+    100%{transform: translateY(-100%);}
+}
+@keyframes animate-bottom{
+    0%{transform: translateX(100%);}
+    100%{transform: translateX(-100%);}
+}
+@keyframes animate-right{
+    0%{transform: translateY(-100%);}
+    100%{transform: translateY(100%);}
 }
 
 @keyframes moveBanner{
@@ -100,4 +199,68 @@ header{
         transform: translate(0) rotateY(0);
         opacity: 1;
     }
+}
+
+.sidebar{
+    width: 20rem;
+    height: 100vh;
+    background-color: #eee;
+    position: fixed;
+    top: 0;
+    right: -20rem;
+    transition: all 1s;
+}
+
+.sidebar.show-menu{
+    right: 0;
+}
+
+.menu{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.menu-item{
+    text-align: center;
+    margin-bottom: .3rem;
+}
+
+.menu-link{
+    font-family: var(--font-action);
+    font-size: 2rem;
+    color: #555;
+    margin-bottom: .5rem;
+    transition: color 0.5s ease;
+}
+
+.menu-link:hover{
+    color: #a044ff;
+}
+
+.social{
+    width: 100%;
+    position: absolute;
+    bottom: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.social-media{
+    color: #555;
+    height: 3rem;
+    width: 3rem;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.3s;
+}
+
+.social-media:hover{
+    box-shadow: .3rem .3rem 5px rgba(0, 0, 0, 0.5);
 }
